@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <!-- 콘솔 출력 (stdout) -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 일별 파일로 저장 -->
+    <appender name="rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 현재 날짜의 파일은 아래 경로에 invalid.log로 저장 -->
+        <file>log/logback.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level{35} - %msg%n</pattern>
+        </encoder>
+        <!-- 요일이 바뀌면서 과거 로그 파일 이름으로 변경. ex) invalid.log -> invalid.log.180817 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>log/logback.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- 5MB를 초과하면 새로운 번호를 붙여서 새로운 로그파일 생성. ex) invalid.log.180817.2.log -->
+            <maxFileSize>5MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+
+    <!-- 기본으로 적용되는 설정 -->
+    <root level="debug">
+        <appender-ref ref="console"/>
+    </root>
+
+    <!-- 추후 java 코드에서 log.file 란 이름을 호출한다 -->
+    <logger name="file" level="info" additivity="false">
+        <!-- 위의 <appender name='rollingFileAppender .. > 를 호출한다 -->
+        <appender-ref ref="rollingFileAppender"/>
+
+        <!-- 파일 로깅과 함께 콘솔 출력도 한다 -->
+        <appender-ref ref="console"/>
+    </logger>
+
+</configuration>
