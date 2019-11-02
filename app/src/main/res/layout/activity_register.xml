@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/startviewimage"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:text="REGISTER"
+        android:textSize="25pt"
+        android:textAlignment="center"
+        android:background="#CC444444"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:background="#EE555555">
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="ID"
+            android:textSize="15pt"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/idRegText"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="2.5"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:maxLength="12"
+            android:textSize="15pt"
+            android:hint="max 12 characters"
+            android:inputType="text"/>
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="PW"
+            android:textSize="15pt"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/pwRegText"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="2.5"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:maxLength="12"
+            android:textSize="15pt"
+            android:hint="max 20 characters"
+            android:inputType="textPassword"/>
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:rowCount="1"
+        android:columnCount="1"
+        android:background="#CC444444">
+
+        <Button
+            android:id="@+id/registerSubmitButton"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#CC444444"
+            android:padding="20dp"
+            android:text="SUBMIT"
+            android:textSize="15pt"
+            android:textAlignment="center"
+            />
+
+    </GridLayout>
+
+</RelativeLayout>

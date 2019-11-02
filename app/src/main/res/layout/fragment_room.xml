@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RoomFragment">
+
+    <LinearLayout
+        android:id="@+id/roomInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/userContainer_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userContainer_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userContainer_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userContainer_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/roomChattingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/roomInfoContainer"
+        android:layout_above="@id/roomControlContainer">
+
+        <TextView
+            android:id="@+id/roomChattingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/roomEditText"
+            android:textSize="12pt"
+            android:scrollbars="vertical"
+            android:verticalScrollbarPosition="right"
+            android:background="#222222"
+            />
+
+        <EditText
+            android:id="@+id/roomEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            android:maxLength="50"
+            android:textSize="12pt"
+            android:hint="여기에 메세지를 입력하세요."
+            android:inputType="text"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/roomControlContainer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/roomTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Room Title"
+            android:textSize="12pt"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/roomStartButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="start"
+            android:textSize="14pt"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -17,6 +17,7 @@ public class Reader implements Runnable {
     // 멤버 객체 및 변수 ===========================================================
     private InputStream inputStream;
     private Queue<Packet> readQueue;
+    private ShutdownCallback shutdownCallback;
 
     // 상태 변수 ===========================================================
     private boolean bStop;
@@ -30,8 +31,8 @@ public class Reader implements Runnable {
         this.inputStream = stream;
         readQueue = new LinkedList<>();
 
-        initialize();
         bStop = true;
+        initialize();
     }
 
     // public 메서드 ===========================================================
@@ -46,7 +47,7 @@ public class Reader implements Runnable {
                 do {
                     int temp = inputStream.read(headerData);
                     if ( temp == -1 ) {
-                        disconnect();
+                        shutdownCallback.shutdown();
                         return;
                     }
                     recvByte += temp;
@@ -63,7 +64,7 @@ public class Reader implements Runnable {
 
                 // 올바르지 못한 프로토콜은 바로 연결 종료하여 준다.
                 if (!bHead) {
-                    disconnect();
+                    shutdownCallback.shutdown();
                     return;
                 }
 
@@ -84,7 +85,7 @@ public class Reader implements Runnable {
                 do {
                     int temp = inputStream.read(recvData);
                     if ( temp == -1 ) {
-                        disconnect();
+                        shutdownCallback.shutdown();
                         return;
                     }
                     recvByte += temp;
@@ -99,7 +100,7 @@ public class Reader implements Runnable {
 
                 // 올바르지 못한 프로토콜은 바로 연결 종료하여 준다.
                 if(!bEnd) {
-                    disconnect();
+                    shutdownCallback.shutdown();
                     return;
                 }
 
@@ -112,17 +113,37 @@ public class Reader implements Runnable {
                 readQueue.add(new Packet(new String(content), type));
 
                 // 분석 및 작업
-                LOGGER.debug("받은 메세지 :: " + readQueue.poll().getContent());
+                Packet packet = readQueue.poll();
+                switch(packet.getType())
+                {
+                    case Packet.PACKET_TYPE_STANDARD:
+                        LOGGER.debug("받은 메세지 :: " + packet.getContent());
+                        break;
+
+                    default:
+                        break;
+                }
 
                 initialize();
 
             } catch(IOException e) {
                 FILELOGGER.info("READER -> 서버와의 연결이 끊어졌습니다. : {}", e);
+                shutdownCallback.shutdown();
                 return;
-            } catch(Exception e) {
-
+            } catch (Exception e) {
+                FILELOGGER.error("Reader -> 알 수 없는 오류 발생 : {}", e);
+                shutdownCallback.shutdown();
+                return;
             }
         }
+    }
+
+    public void threadStopRequest() {
+        bStop = true;
+    }
+
+    public void setShutdownCallback(ShutdownCallback callback) {
+        this.shutdownCallback = callback;
     }
 
     // private 메서드 ===========================================================
@@ -131,10 +152,6 @@ public class Reader implements Runnable {
         bEnd = false;
         type = 0;
         size = 0;
-    }
-
-    private void disconnect() {
-
     }
 
     private short byteArrayToShort(byte[] arr)

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LobbyFragment">
+
+    <LinearLayout
+        android:id="@+id/lobbyActionBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="LOBBY"
+            android:textSize="15pt"
+            android:textAlignment="center"/>
+
+
+        <Button
+            android:id="@+id/roomCreateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="CREATE"/>
+
+        <Button
+            android:id="@+id/exitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="EXIT"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lobbyRoomListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lobbyUserInfoContainer"
+        android:layout_below="@+id/lobbyActionBarContainer"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="#222222">
+
+        <ListView
+            android:id="@+id/roomListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/lobbyUserInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:rowCount="1"
+        android:columnCount="2">
+
+        <LinearLayout
+            android:id="@+id/userPrivateInfoContainer"
+
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:src="@drawable/startviewimage"/>
+
+            <TextView
+                android:id="@+id/userIDText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="userID"
+                android:textSize="12pt"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/lobbyUserLogContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:rowCount="2"
+            android:columnCount="1">
+
+            <TextView
+                android:id="@+id/scoreText"
+                android:layout_width="match_parent"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:text="score"
+                android:textSize="12pt"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/moneyText"
+                android:layout_width="match_parent"
+                android:layout_rowWeight="1"
+                android:gravity="center"
+                android:text="money"
+                android:textSize="12pt"
+                android:textAlignment="center"/>
+
+        </GridLayout>
+
+    </GridLayout>
+
+</RelativeLayout>

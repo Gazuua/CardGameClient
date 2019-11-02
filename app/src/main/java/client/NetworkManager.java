@@ -18,7 +18,9 @@ public class NetworkManager implements Runnable {
     // 멤버 객체 및 변수 ===========================================================
     private Socket socket;
 
-    private Thread startThread; // ANR 방지를 위해 전용 스레드로 작업 진행
+    private Thread startThread; // ANR 방지를 위해 전용 스레드로 초기화 작업 진행
+    private ConnectionListener connectionListener;
+    private ShutdownClass shutdownCallbackClass;
 
     private Reader reader;
     private Thread readerThread;
@@ -28,10 +30,8 @@ public class NetworkManager implements Runnable {
 
     // Singleton 패턴에 기반한 생성자 ===========================================================
     private NetworkManager() {
-        LOGGER.debug("구성 중...");
         startThread = new Thread(this);
-        LOGGER.debug("구성 완료");
-    };
+    }
 
     private static class Singleton {
         private static final NetworkManager instance = new NetworkManager();
@@ -46,26 +46,26 @@ public class NetworkManager implements Runnable {
     public void run() {
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress("121.132.103.138", 55248), 5000);
+            socket.connect(new InetSocketAddress("119.193.229.120", 55248), 2000);
+            connectionListener.onSuccess();
             FILELOGGER.info("서버에 접속됨 : {}/55248", InetAddress.getLocalHost().getAddress());
 
-            socket.setSoLinger(true, 0);
             socket.setTcpNoDelay(true);
 
+            shutdownCallbackClass = new ShutdownClass();
+
             reader = new Reader(socket.getInputStream());
+            reader.setShutdownCallback(shutdownCallbackClass);
             readerThread = new Thread(reader);
             readerThread.start();
 
             writer = new Writer(socket.getOutputStream());
+            writer.setShutdownCallback(shutdownCallbackClass);
             writerThread = new Thread(writer);
             writerThread.start();
 
-            while(true)
-            {
-                writeRequest("HELLO!", (short)0);
-                Thread.sleep(1000);
-            }
         } catch (Exception e) {
+            connectionListener.onFail();
             e.printStackTrace();
         }
     }
@@ -74,15 +74,45 @@ public class NetworkManager implements Runnable {
         startThread.start();
     }
 
+    public void shutdown() {
+        try {
+            reader.threadStopRequest();
+            writer.threadStopRequest();
+            Thread.sleep(500);
+            synchronized (socket) {
+                if (!socket.isClosed())
+                    socket.close();
+            }
+        } catch(Exception e) {
+            FILELOGGER.error("소켓 연결 종료 중 알 수 없는 예외 발생 : {}", e);
+            System.exit(-1);
+        }
+    }
+
     public void writeRequest(String content, short type) {
         Packet packet = new Packet(content, type);
         writer.writeRequest(packet);
     }
 
-    public void shutdownGracefully() {
-
+    public void setConnectionListener(ConnectionListener listener) {
+        this.connectionListener = listener;
     }
 
-    // protected 메서드 ===========================================================
-
+    class ShutdownClass implements ShutdownCallback
+    {
+        @Override
+        public void shutdown() {
+            try {
+                reader.threadStopRequest();
+                writer.threadStopRequest();
+                synchronized (socket) {
+                    if (!socket.isClosed())
+                        socket.close();
+                }
+            } catch(Exception e) {
+                FILELOGGER.error("소켓 연결 종료 중 알 수 없는 예외 발생 : {}", e);
+                System.exit(-1);
+            }
+        }
+    }
 }

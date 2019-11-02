@@ -1,6 +1,8 @@
 package client;
 
 public class Packet {
+	public static final short PACKET_TYPE_STANDARD = 0;
+
 	private short type;
 	private String content;
 

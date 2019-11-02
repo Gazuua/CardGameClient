@@ -4,29 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".StartActivity"
+    android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:text=""
-        android:background="@color/colorPrimary"/>
+        <ImageView
+            android:id="@+id/startView"
+            android:layout_width="match_parent"
+            android:layout_height="575dp"
+            android:src="@drawable/startviewimage"
+            android:gravity="center"
+            android:background="#000000" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="HELLO WORLD!"
-        android:textSize="12pt"
-        android:textAlignment="center"
-        />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15pt"
-        android:text="CLICK!"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:text="Touch to Start!"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp"/>
 
 </LinearLayout>
