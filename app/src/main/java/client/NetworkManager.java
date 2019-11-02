@@ -64,6 +64,9 @@ public class NetworkManager implements Runnable {
             writerThread = new Thread(writer);
             writerThread.start();
 
+            // 테스트용
+            writeRequest("HELLO!", Packet.PACKET_TYPE_STANDARD);
+
         } catch (Exception e) {
             connectionListener.onFail();
             e.printStackTrace();
@@ -96,6 +99,10 @@ public class NetworkManager implements Runnable {
 
     public void setConnectionListener(ConnectionListener listener) {
         this.connectionListener = listener;
+    }
+
+    public void setResponseCallback(NetworkResponseCallback callback) {
+        reader.setResponseCallback(callback);
     }
 
     class ShutdownClass implements ShutdownCallback

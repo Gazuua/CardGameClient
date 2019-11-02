@@ -18,6 +18,7 @@ public class Reader implements Runnable {
     private InputStream inputStream;
     private Queue<Packet> readQueue;
     private ShutdownCallback shutdownCallback;
+    private NetworkResponseCallback responseCallback;
 
     // 상태 변수 ===========================================================
     private boolean bStop;
@@ -120,6 +121,10 @@ public class Reader implements Runnable {
                         LOGGER.debug("받은 메세지 :: " + packet.getContent());
                         break;
 
+                    case Packet.PACKET_TYPE_LOGIN_RES:
+                        responseCallback.onRecv(packet.getContent());
+                        break;
+
                     default:
                         break;
                 }
@@ -145,6 +150,8 @@ public class Reader implements Runnable {
     public void setShutdownCallback(ShutdownCallback callback) {
         this.shutdownCallback = callback;
     }
+
+    public void setResponseCallback(NetworkResponseCallback callback) { this.responseCallback = callback; }
 
     // private 메서드 ===========================================================
     private void initialize() {

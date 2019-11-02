@@ -2,13 +2,13 @@ package client;
 
 public class Packet {
 	public static final short PACKET_TYPE_STANDARD = 0;
+	public static final short PACKET_TYPE_LOGIN_REQ = 1;
+	public static final short PACKET_TYPE_LOGIN_RES = 2;
+	public static final short PACKET_TYPE_REGISTER_REQ = 3;
+	public static final short PACKET_TYPE_REGISTER_RES = 4;
 
 	private short type;
 	private String content;
-
-	public Packet(byte[] data) {
-
-	}
 
 	public Packet(String content, short type) {
 		this.type = type;
