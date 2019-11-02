@@ -122,6 +122,7 @@ public class Reader implements Runnable {
                         break;
 
                     case Packet.PACKET_TYPE_LOGIN_RES:
+                    case Packet.PACKET_TYPE_REGISTER_RES:
                         responseCallback.onRecv(packet.getContent());
                         break;
 

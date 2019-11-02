@@ -107,6 +107,12 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // 로그인 요청 대기 중인데 함부로 회원가입 액티비티로 넘어가지 않도록 처리
+                if (isWaiting)
+                    return;
+
+                // 버튼을 누르면 회원가입 액티비티로 넘어간다.
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
