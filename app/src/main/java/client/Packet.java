@@ -17,6 +17,10 @@ public class Packet {
 	public static final short PACKET_TYPE_ROOM_INFO_RES = 13;
 	public static final short PACKET_TYPE_ROOM_USER_RES = 14;
 	public static final short PACKET_TYPE_EXIT_ROOM_REQ = 15;
+	public static final short PACKET_TYPE_ROOM_CHAT_REQ = 16;
+	public static final short PACKET_TYPE_ROOM_CHAT_RES = 17;
+	public static final short PACKET_TYPE_ROOM_START_REQ = 18;
+	public static final short PACKET_TYPE_ROOM_START_RES = 19;
 
 	private short type;
 	private String content;

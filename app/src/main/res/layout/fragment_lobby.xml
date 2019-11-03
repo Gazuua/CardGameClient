@@ -47,14 +47,19 @@
         android:orientation="vertical"
         android:background="#222222">
 
-        <ListView
-            android:id="@+id/roomListView"
+        <ScrollView
+            android:id="@+id/lobbyScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:verticalScrollbarPosition="right">
+            android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/roomListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+        </ScrollView>
 
     </LinearLayout>
 

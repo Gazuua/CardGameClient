@@ -22,30 +22,56 @@
         android:layout_below="@id/roomInfoContainer"
         android:layout_above="@id/roomControlContainer">
 
-        <TextView
-            android:id="@+id/roomChattingView"
+        <ScrollView
+            android:id="@+id/roomScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_alignParentTop="true"
-            android:layout_above="@+id/roomEditText"
-            android:textSize="12pt"
-            android:scrollbars="vertical"
-            android:verticalScrollbarPosition="right"
             android:background="#222222"
-            />
+            android:layout_above="@+id/roomTextBoxContainer">
 
-        <EditText
-            android:id="@+id/roomEditText"
+            <TextView
+                android:id="@+id/roomChattingView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                />
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/roomTextBoxContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_alignParentBottom="true"
-            android:maxLines="1"
-            android:maxLength="50"
-            android:textSize="12pt"
-            android:hint="여기에 메세지를 입력하세요."
-            android:inputType="text" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/roomEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:maxLines="1"
+                android:maxLength="50"
+                android:textSize="12pt"
+                android:hint="메세지를 입력하세요."
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/roomChattingSendButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="SEND"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

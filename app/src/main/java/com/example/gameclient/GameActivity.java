@@ -106,8 +106,10 @@ public class GameActivity extends AppCompatActivity {
 
             // 현재 방 안에 있을 경우 뒤로 두 번 누르면 방에서 퇴장
             case PLACE_ROOM:
-                if (System.currentTimeMillis() - lastTimeBackPressed < 1500)
+                if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
+                    roomFragment.onExitRoom();
                     fragmentChanger.onExitRoom();
+                }
                 else {
                     Toast.makeText(this, "'뒤로' 버튼을 한 번 더 누르시면 방에서 퇴장합니다.", Toast.LENGTH_SHORT).show();
                     lastTimeBackPressed = System.currentTimeMillis();

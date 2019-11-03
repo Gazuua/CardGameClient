@@ -34,7 +34,6 @@ public class GameFragment extends Fragment {
 
     // 게임 끝나면 다시 방으로 나가는 메서드 escape()
     public void escape() {
-
         fragmentChanger.onExitRoom();
     }
 

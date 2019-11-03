@@ -1,6 +1,7 @@
 package com.example.gameclient;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -121,5 +122,13 @@ public class RegisterActivity extends AppCompatActivity {
                 NetworkManager.getInstance().writeRequest(encodedString, Packet.PACKET_TYPE_REGISTER_REQ);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

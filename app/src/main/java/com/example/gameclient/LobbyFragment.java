@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,8 @@ public class LobbyFragment extends Fragment {
         final Button createButton = view.findViewById(R.id.roomCreateButton);
         final Button refreshButton = view.findViewById(R.id.refreshButton);
 
+        Log.d("여기는 로비!", "반가워용");
+
         lobbyFragmentCallback = new NetworkResponseCallback() {
             @Override
             public void onRecv(String content, short type) {
@@ -88,8 +92,19 @@ public class LobbyFragment extends Fragment {
                     // 로비 입장 시 방 목록을 요청하는 패킷에 대한 응답이다.
                     case Packet.PACKET_TYPE_ROOM_LIST_RES: {
                         // 방이 없어서 리스트가 없는 경우 null이 올 때도 있다.
-                        // 이 경우 그냥 아무것도 안 하고 빠져나가 준다.
                         if (content.equals("null")) {
+                            roomList.clear();
+                            // 리스트를 비워버리고 화면에 보여준다.
+                           handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (listView.getAdapter() == null)
+                                        listView.setAdapter(adapter);
+                                    else adapter.notifyDataSetChanged();
+
+                                    isWaiting = false;
+                                }
+                            });
                             isWaiting = false;
                             return;
                         }
