@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Reader implements Runnable {
@@ -117,16 +116,16 @@ public class Reader implements Runnable {
                 Packet packet = readQueue.poll();
                 switch(packet.getType())
                 {
+                    // 현재 STANDARD 패킷을 제외한 모든 패킷은 각 액티비티, 프래그먼트로부터 등록된
+                    // 고유 콜백 객체에서 후처리한다.
                     case Packet.PACKET_TYPE_STANDARD:
                         LOGGER.debug("받은 메세지 :: " + packet.getContent());
                         break;
 
-                    case Packet.PACKET_TYPE_LOGIN_RES:
-                    case Packet.PACKET_TYPE_REGISTER_RES:
-                        responseCallback.onRecv(packet.getContent());
-                        break;
-
+                    // 현재 STANDARD 패킷을 제외한 모든 패킷은 각 액티비티, 프래그먼트로부터 등록된
+                    // 고유 콜백 객체에서 후처리한다.
                     default:
+                        responseCallback.onRecv(packet.getContent(), packet.getType());
                         break;
                 }
 
@@ -152,7 +151,7 @@ public class Reader implements Runnable {
         this.shutdownCallback = callback;
     }
 
-    public void setResponseCallback(NetworkResponseCallback callback) { this.responseCallback = callback; }
+    public void setResponseCallback(NetworkResponseCallback callback) {this.responseCallback = callback;}
 
     // private 메서드 ===========================================================
     private void initialize() {

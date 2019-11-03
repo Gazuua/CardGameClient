@@ -6,6 +6,17 @@ public class Packet {
 	public static final short PACKET_TYPE_LOGIN_RES = 2;
 	public static final short PACKET_TYPE_REGISTER_REQ = 3;
 	public static final short PACKET_TYPE_REGISTER_RES = 4;
+	public static final short PACKET_TYPE_ENTER_LOBBY_REQ = 5;
+	public static final short PACKET_TYPE_USER_INFO_RES = 6;
+	public static final short PACKET_TYPE_ROOM_LIST_RES = 7;
+	public static final short PACKET_TYPE_ROOM_MAKE_REQ = 8;
+	public static final short PACKET_TYPE_ROOM_MAKE_RES = 9;
+	public static final short PACKET_TYPE_ENTER_ROOM_REQ = 10;
+	public static final short PACKET_TYPE_ENTER_ROOM_RES = 11;
+	public static final short PACKET_TYPE_ROOM_INFO_REQ = 12;
+	public static final short PACKET_TYPE_ROOM_INFO_RES = 13;
+	public static final short PACKET_TYPE_ROOM_USER_RES = 14;
+	public static final short PACKET_TYPE_EXIT_ROOM_REQ = 15;
 
 	private short type;
 	private String content;

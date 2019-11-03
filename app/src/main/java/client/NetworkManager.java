@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
-import java.nio.channels.SocketChannel;
 
 public class NetworkManager implements Runnable {
     // 로깅 인스턴스 ===========================================================

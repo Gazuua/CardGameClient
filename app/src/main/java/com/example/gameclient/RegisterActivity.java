@@ -1,7 +1,6 @@
 package com.example.gameclient;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import client.NetworkManager;
 import client.NetworkResponseCallback;
 import client.Packet;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    NetworkResponseCallback registerActivityCallback;
 
     boolean isWaiting;
 
@@ -30,6 +32,54 @@ public class RegisterActivity extends AppCompatActivity {
 
         isWaiting = false;
 
+        registerActivityCallback = new NetworkResponseCallback() {
+            @Override
+            public void onRecv(String content, short type) {
+                // RegisterActivity의 네트워크 응답 콜백 클래스이다.
+                // 이 화면에서 클라이언트가 받게 되는 응답의 종류는
+                // REGISTER_RES 이다.
+                switch(type)
+                {
+                    case Packet.PACKET_TYPE_REGISTER_RES:
+                        Log.d("회원가입 응답", content);
+                        // 회원가입 응답에 대한 response 받고 그에 대한 처리를 한다
+                        // 성공 시 회원가입 완료를 알리고 LoginActivity로 돌아간다.
+                        if(content.equals("success")) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                        }
+                        // 실패 시 응답코드에 맞는 처리 (중복된 아이디가 있을 경우, 혹은 특수문자 '/' 포함시 실패)
+                        else {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                    builder.setTitle("회원가입 실패")
+                                            .setMessage("중복되거나 잘못된 형식의 아이디입니다. 다른 아이디를 입력해 주세요.")
+                                            .setNeutralButton("확인", null)
+                                            .create()
+                                            .show();
+
+                                    idText.setText("");
+
+                                    isWaiting = false;
+                                }
+                            });
+                        }
+                        break;
+                }
+            }
+        };
+
+        // 콜백 구현체를 등록한다.
+        NetworkManager.getInstance().setResponseCallback(registerActivityCallback);
+
+        // 회원가입 버튼을 누를 경우 아래 코드가 실행된다.
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,44 +115,9 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 서버에 보내고 결과값 받기
+                // 서버에 보내고 결과에 대한 처리는 콜백에서서
                 String encodedString = id + "/" + pw;
                 Log.d("회원가입 요청", encodedString);
-                NetworkManager.getInstance().setResponseCallback(new NetworkResponseCallback() {
-                    @Override
-                    public void onRecv(String content) {
-                        Log.d("회원가입 응답", content);
-                        // 회원가입 응답에 대한 response 받고 그에 대한 처리를 한다
-                        // 성공 시 LoginActivity로 돌아간다.
-                        if(content.equals("success")) {
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    finish();
-                                }
-                            });
-                        }
-                        // 실패 시 응답코드에 맞는 처리 (중복된 아이디가 있을 경우, 혹은 특수문자 '/' 포함시 실패)
-                        else {
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                    builder.setTitle("회원가입 실패")
-                                            .setMessage("중복되거나 잘못된 형식의 아이디입니다. 다른 아이디를 입력해 주세요.")
-                                            .setNeutralButton("확인", null)
-                                            .create()
-                                            .show();
-
-                                    idText.setText("");
-
-                                    isWaiting = false;
-                                }
-                            });
-                        }
-                    }
-                });
-
                 NetworkManager.getInstance().writeRequest(encodedString, Packet.PACKET_TYPE_REGISTER_REQ);
             }
         });

@@ -5,51 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".RoomFragment">
 
-    <LinearLayout
+    <GridLayout
         android:id="@+id/roomInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal">
+        android:columnCount="4">
 
-        <LinearLayout
-            android:id="@+id/userContainer_1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/userContainer_2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/userContainer_3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/userContainer_4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </GridLayout>
 
     <RelativeLayout
         android:id="@+id/roomChattingContainer"
@@ -81,7 +45,7 @@
             android:maxLength="50"
             android:textSize="12pt"
             android:hint="여기에 메세지를 입력하세요."
-            android:inputType="text"/>
+            android:inputType="text" />
 
     </RelativeLayout>
 

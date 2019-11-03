@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="6"
             android:gravity="center"
             android:text="LOBBY"
             android:textSize="15pt"
@@ -30,10 +30,10 @@
             android:text="CREATE"/>
 
         <Button
-            android:id="@+id/exitButton"
+            android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="EXIT"/>
+            android:text="REFRESH"/>
 
     </LinearLayout>
 
@@ -51,7 +51,8 @@
             android:id="@+id/roomListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            android:verticalScrollbarPosition="right">
 
         </ListView>
 
@@ -68,7 +69,6 @@
 
         <LinearLayout
             android:id="@+id/userPrivateInfoContainer"
-
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -92,6 +92,7 @@
             android:id="@+id/lobbyUserLogContainer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_columnWeight="1"
             android:rowCount="2"
             android:columnCount="1">
 
@@ -99,6 +100,7 @@
                 android:id="@+id/scoreText"
                 android:layout_width="match_parent"
                 android:layout_rowWeight="1"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:text="score"
                 android:textSize="12pt"
@@ -108,6 +110,7 @@
                 android:id="@+id/moneyText"
                 android:layout_width="match_parent"
                 android:layout_rowWeight="1"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:text="money"
                 android:textSize="12pt"
