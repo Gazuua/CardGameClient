@@ -32,7 +32,7 @@ public class RoomFragment extends Fragment {
     int roomNumber;
     int roomUser;
 
-    boolean isWaiting = false;
+    boolean isWaiting;
 
     public RoomFragment() {
         // Required empty public constructor
@@ -53,6 +53,7 @@ public class RoomFragment extends Fragment {
 
         userInfoContainer = view.findViewById(R.id.roomInfoContainer);
 
+        isWaiting = false;
         final Handler handler = new Handler();
 
         // 이 프래그먼트에 진입했다는 것은 방에 들어왔다는 뜻이므로 가장 먼저 방 번호를 설정한다.
@@ -103,6 +104,8 @@ public class RoomFragment extends Fragment {
                                     moneyText.setText(info[i+1]);
 
                                     roomUser++;
+
+                                    view.invalidate();
                                 }
                             }
                         });

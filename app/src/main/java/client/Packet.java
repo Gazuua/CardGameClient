@@ -21,6 +21,15 @@ public class Packet {
 	public static final short PACKET_TYPE_ROOM_CHAT_RES = 17;
 	public static final short PACKET_TYPE_ROOM_START_REQ = 18;
 	public static final short PACKET_TYPE_ROOM_START_RES = 19;
+	public static final short PACKET_TYPE_ENTER_GAME_REQ = 20;
+	public static final short PACKET_TYPE_GAME_USER_RES = 21;
+	public static final short PACKET_TYPE_GAME_INFO_RES = 22;
+	public static final short PACKET_TYPE_GAME_CARD_RES = 23;
+	public static final short PACKET_TYPE_GAME_BETTING_REQ = 24;
+	public static final short PACKET_TYPE_GAME_BETTING_RES = 25;
+	public static final short PACKET_TYPE_GAME_BETTING_DOUBLE_RES = 26;
+	public static final short PACKET_TYPE_GAME_SET_RES = 27;
+
 
 	private short type;
 	private String content;

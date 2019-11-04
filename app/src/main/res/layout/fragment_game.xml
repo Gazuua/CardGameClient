@@ -43,7 +43,7 @@
             android:id="@+id/gameCardView_1"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/gameCardView_2"
@@ -66,39 +66,10 @@
     <LinearLayout
         android:id="@+id/gameOtherStateContainer"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:layout_margin="10dp"
         android:layout_below="@id/gameCardText"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/gameStateContainer_1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/gameStateContainer_2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/gameStateContainer_3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
         android:id="@+id/gameBettingContainer"
@@ -112,7 +83,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이번 턴 베팅금액"
+            android:text="기준 베팅금액"
             android:textSize="12pt"
             android:textAlignment="center"/>
 
@@ -136,15 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="죽어"
-                android:textSize="15pt"/>
-
-            <Button
-                android:id="@+id/gameCheckButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="체크"
+                android:text="다이"
                 android:textSize="15pt"/>
 
             <Button

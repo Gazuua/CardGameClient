@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="140dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:src="@drawable/startviewimage"/>
+
+    <TextView
+        android:id="@+id/gameUserNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유저이름"
+        android:textSize="9pt"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/gameUserBettingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="베팅금액"
+        android:textSize="9pt"
+        android:textAlignment="center"/>
+
+</LinearLayout>
